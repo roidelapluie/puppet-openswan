@@ -4,8 +4,7 @@ define openswan::connection (
   $right,
   $rightsubnet,
   $esp,
-  $ike,
-
+  $ike
 ) {
     file {
       "/etc/ipsec.d/${name}.conf":
