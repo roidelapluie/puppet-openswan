@@ -10,5 +10,7 @@ define openswan::connection (
       "/etc/ipsec.d/${name}.conf":
         ensure  => present,
         content => template('openswan/connection.erb'),
+        notify  => Service['ipsec'],
+        require => Package['ipsec'],
     }
 }
