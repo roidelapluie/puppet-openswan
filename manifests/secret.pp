@@ -5,7 +5,7 @@ define openswan::secret (
   file {
     "/etc/ipsec.d/$name.secrets":
       ensure  => present,
-      content => "${ip} %any 0.0.0.0: PSK \"${secret}\"",
+      content => "${ip} %any 0.0.0.0: PSK \"${secret}\"\n",
       require => Package['openswan'],
   }
 }
