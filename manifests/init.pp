@@ -16,7 +16,7 @@ class openswan {
       mode    => '0600',
       owner   => 'root',
       notify  => Service['ipsec'],
-      require => Package['ipsec'],
+      require => Package['openswan'],
       content => template('openswan/openswan.conf.erb'),
   }
 }

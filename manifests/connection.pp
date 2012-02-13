@@ -11,6 +11,6 @@ define openswan::connection (
         ensure  => present,
         content => template('openswan/connection.erb'),
         notify  => Service['ipsec'],
-        require => Package['ipsec'],
+        require => Package['openswan'],
     }
 }
