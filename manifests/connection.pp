@@ -1,13 +1,21 @@
 define openswan::connection (
   $left,
-  $leftsubnet,
   $right,
-  $rightsubnet,
   $esp,
   $foreignip,
   $ike,
+  $rightsubnet = undef,
+  $rightsubnets = undef,
+  $leftsubnet = undef,
+  $leftsubnets = undef,
   $lifetime = '1h'
 ) {
+  if (!$leftsubnet) and (!$leftsubnets) {
+    fail( '$leftsubnets and $leftsubnet cannot be both empty' )
+  }
+  if (!$rightsubnet) and (!$rightsubnets) {
+    fail( '$rightsubnets and $rightsubnet cannot be both empty' )
+  }
     file {
       "/etc/ipsec.d/${name}.conf":
         ensure  => present,

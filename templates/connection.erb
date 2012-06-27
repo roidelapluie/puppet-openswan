@@ -1,8 +1,10 @@
 conn <%= name %>
-  left = <%= left %>
-  leftsubnet = <%= leftsubnet  %>
-  right = <%= right %>
-  rightsubnet = <%= rightsubnet  %>
+  left = <%= left %><% if leftsubnet  %>
+  leftsubnet = <%= leftsubnet  %><% end %><% if leftsubnets %>
+  leftsubnets = {<% leftsubnets.join ','  %>} <%end%>
+  right = <%= right %><% if rightsubnet  %>
+  rightsubnet = <%= rightsubnet  %><% end %><% if rightsubnets %>
+  rightsubnets = {<% rightsubnets.join ','  %>} <%end%>
   phase2alg = <%= esp %>
   ike = <%= ike %>
   auto = add
