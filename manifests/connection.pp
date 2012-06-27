@@ -5,7 +5,8 @@ define openswan::connection (
   $rightsubnet,
   $esp,
   $foreignip,
-  $ike
+  $ike,
+  $lifetime = '1h'
 ) {
     file {
       "/etc/ipsec.d/${name}.conf":
