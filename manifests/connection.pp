@@ -8,7 +8,8 @@ define openswan::connection (
   $rightsubnets = undef,
   $leftsubnet = undef,
   $leftsubnets = undef,
-  $lifetime = '1h'
+  $salifetime = '8h',
+  $ikelifetime = '1h'
 ) {
   if (!$leftsubnet) and (!$leftsubnets) {
     fail( '$leftsubnets and $leftsubnet cannot be both empty' )
@@ -24,7 +25,7 @@ define openswan::connection (
         require => Package['openswan'],
     }
     exec {
-      "/usr/sbin/ipsec auto --up ${name}":
+      "/usr/sbin/ipsec auto --asynchronous --up ${name}":
         unless  => "/bin/ping -c 4 -w 6 ${foreignip}",
         require => Service['ipsec'],
     }
