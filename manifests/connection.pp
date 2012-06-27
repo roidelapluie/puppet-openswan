@@ -26,7 +26,8 @@ define openswan::connection (
     }
     exec {
       "/usr/sbin/ipsec auto --asynchronous --up ${name}":
-        unless  => "/bin/ping -c 4 -w 6 ${foreignip}",
+        unless  => "ip xfrm state|grep \"src ${left} dst ${right}\"",
+        path    => "/sbin:/bin",
         require => Service['ipsec'],
     }
 
