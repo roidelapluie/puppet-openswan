@@ -27,7 +27,7 @@ define openswan::connection (
     exec {
       "/usr/sbin/ipsec auto --asynchronous --up ${name}":
         unless  => "ip xfrm state|grep \"src ${left} dst ${right}\"",
-        path    => "/sbin:/bin",
+        path    => '/sbin:/bin',
         require => Service['ipsec'],
     }
 
