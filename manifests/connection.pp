@@ -3,6 +3,7 @@ define openswan::connection (
   $right,
   $esp,
   $foreignip,
+  $localtestip,
   $ike,
   $rightsubnet = undef,
   $rightsubnets = undef,
@@ -17,6 +18,13 @@ define openswan::connection (
   if (!$rightsubnet) and (!$rightsubnets) {
     fail( '$rightsubnets and $rightsubnet cannot be both empty' )
   }
+    cron {
+      "keepalive-${name}":
+        ensure  => present,
+        command => "/bin/ping -c 4 -I ${localtestip} ${foreignip} || /usr/sbin/ipsec auto --up ${name}",
+        require => Package['openswan'],
+        minute  => '*/10',
+    }
     file {
       "/etc/ipsec.d/${name}.conf":
         ensure  => present,
