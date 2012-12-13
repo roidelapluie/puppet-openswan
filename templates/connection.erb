@@ -7,7 +7,7 @@ conn <%= name %>
   rightsubnets = {<%= rightsubnets.join(",")  %>}<%end%>
   phase2alg = <%= esp %>
   ike = <%= ike %>
-  auto = add
+  auto = up
   authby = secret
   type = tunnel
   salifetime = <%= salifetime %>
