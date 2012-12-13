@@ -29,14 +29,14 @@ define openswan::connection (
       "/etc/ipsec.d/${name}.conf":
         ensure  => present,
         content => template('openswan/connection.erb'),
-        notify  => Service['ipsec'],
+        notify  => Exec["ipsec-reload-${name}"],
         require => Package['openswan'],
     }
     exec {
-      "/usr/sbin/ipsec auto --asynchronous --up ${name}":
-        unless  => "ip xfrm state|grep \"src ${left} dst ${right}\"",
-        path    => '/sbin:/bin',
-        require => Service['ipsec'],
+      "ipsec-reload-${name}":
+        command     => "/usr/sbin/ipsec auto --replace ${name}",
+        refreshonly => true,
+        require     => Service['ipsec'],
     }
 
 }
