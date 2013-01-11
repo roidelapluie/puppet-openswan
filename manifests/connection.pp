@@ -9,6 +9,8 @@ define openswan::connection (
   $rightsubnets = undef,
   $leftsubnet = undef,
   $leftsubnets = undef,
+  $leftid = undef,
+  $rightid = undef,
   $salifetime = '8h',
   $ikelifetime = '1h'
 ) {
