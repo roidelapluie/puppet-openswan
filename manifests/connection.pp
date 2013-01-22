@@ -23,7 +23,7 @@ define openswan::connection (
     cron {
       "keepalive-${name}":
         ensure  => absent,
-        command => "/bin/ping -c 4 -I ${localtestip} ${foreignip} || (/usr/sbin/ipsec auto --down ${name} && /usr/sbin/ipsec auto --up ${name} && /usr/bin/logger -t openswan VPN to ${name} relaunched)",
+        command => "/bin/ping -c 4 -I ${localtestip} ${foreignip} &> /dev/null || (/usr/sbin/ipsec auto --down ${name} && /usr/sbin/ipsec auto --up ${name} && /usr/bin/logger -t openswan VPN to ${name} relaunched) &> /dev/null",
         require => Package['openswan'],
         minute  => '*/10',
     }
