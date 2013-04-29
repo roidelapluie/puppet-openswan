@@ -7,6 +7,7 @@ class openswan {
   service {
     'ipsec':
       ensure     => running,
+      enable     => true,
       hasstatus  => true,
       hasrestart => true,
   }
