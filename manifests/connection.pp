@@ -11,6 +11,8 @@ define openswan::connection (
   $leftsubnets = undef,
   $leftid = undef,
   $rightid = undef,
+  $leftsourceip = undef,
+  $rightsourceip = undef,
   $salifetime = '8h',
   $ikelifetime = '1h'
 ) {
