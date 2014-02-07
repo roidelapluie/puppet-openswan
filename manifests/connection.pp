@@ -11,6 +11,8 @@ define openswan::connection (
   $leftsubnets = undef,
   $leftid = undef,
   $rightid = undef,
+  $leftsourceip = undef,
+  $rightsourceip = undef,
   $salifetime = '8h',
   $ikelifetime = '1h'
 ) {
@@ -22,8 +24,8 @@ define openswan::connection (
   }
     cron {
       "keepalive-${name}":
-        ensure  => present,
-        command => "/bin/ping -c 4 -I ${localtestip} ${foreignip} || (/usr/sbin/ipsec auto --down ${name} && /usr/sbin/ipsec auto --up ${name} && /usr/bin/logger -t openswan VPN to ${name} relaunched)",
+        ensure  => absent,
+        command => "/bin/ping -c 4 -I ${localtestip} ${foreignip} &> /dev/null || (/usr/sbin/ipsec auto --down ${name} && /usr/sbin/ipsec auto --up ${name} && /usr/bin/logger -t openswan VPN to ${name} relaunched) &> /dev/null",
         require => Package['openswan'],
         minute  => '*/10',
     }
