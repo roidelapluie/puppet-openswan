@@ -1,6 +1,6 @@
 define openswan::secret (
-  $local_ip,
-  $remote_ip = '%any',
+  $local_ip = '%any',
+  $remote_ip,
   $secret
 ) {
   file {
